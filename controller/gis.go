@@ -17,7 +17,7 @@ func GetRegion(respw http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		var respn model.Response
 		respn.Status = "Error : Token Tidak Valid "
-		respn.Info = config.PublicKeyWhatsAuth
+		respn.Info = "public Key :" + config.PublicKeyWhatsAuth
 		respn.Location = "Decode Token Error: " + at.GetLoginFromHeader(req)
 		respn.Response = err.Error()
 		at.WriteJSON(respw, http.StatusForbidden, respn)
