@@ -33,7 +33,7 @@ func GetRegion(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 	filter := bson.M{
-		"batas": bson.M{
+		"border": bson.M{
 			"$geoIntersects": bson.M{
 				"$geometry": bson.M{
 					"type":        "Point",
