@@ -6,7 +6,7 @@ import (
 
 // Daftar origins yang diizinkan
 var Origins = []string{
-	"https://www.bukupedia.co.id",
+	"https://petapedia.if.co.id",
 	"https://naskah.bukupedia.co.id",
 	"https://bukupedia.co.id",
 }
