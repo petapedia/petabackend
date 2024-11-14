@@ -69,7 +69,7 @@ func GetRoads(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 	filter := bson.M{
-		"border": bson.M{
+		"geometry": bson.M{
 			"$near": bson.M{
 				"$geometry": bson.M{
 					"type":        "Point",
