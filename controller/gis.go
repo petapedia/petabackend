@@ -75,11 +75,11 @@ func GetRoads(respw http.ResponseWriter, req *http.Request) {
 					"type":        "Point",
 					"coordinates": []float64{longlat.Longitude, longlat.Latitude},
 				},
-				"$maxDistance": 50,
+				"$maxDistance": 600,
 			},
 		},
 	}
-	roads, err := atdb.GetOneDoc[model.Roads](config.Mongoconn, "jalan", filter)
+	roads, err := atdb.GetAllDoc[[]model.Roads](config.Mongoconn, "roads", filter)
 	if err != nil {
 		at.WriteJSON(respw, http.StatusNotFound, roads)
 		return
