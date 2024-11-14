@@ -21,6 +21,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 	//gis
 	case method == "POST" && path == "/data/gis/lokasi":
 		controller.GetRegion(w, r)
+	case method == "POST" && path == "/data/gis/jalan":
+		controller.GetRoads(w, r)
 	//chat bot inbox
 	case method == "POST" && at.URLParam(path, "/webhook/nomor/:nomorwa"):
 		controller.PostInboxNomor(w, r)

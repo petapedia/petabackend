@@ -16,6 +16,24 @@ type Region struct {
 	Border      Location           `bson:"border" json:"border"`
 }
 
+type Roads struct {
+	ID         primitive.ObjectID `bson:"_id,omitempty"`
+	Type       string             `bson:"type"`
+	Geometry   Geometry           `bson:"geometry"`
+	Properties Properties         `bson:"properties"`
+}
+
+type Geometry struct {
+	Type        string       `bson:"type"`
+	Coordinates [][2]float64 `bson:"coordinates"`
+}
+
+type Properties struct {
+	OSMID   int64  `bson:"osm_id"`
+	Name    string `bson:"name"`
+	Highway string `bson:"highway"`
+}
+
 type LongLat struct {
 	Longitude float64 `bson:"long" json:"long"`
 	Latitude  float64 `bson:"lat" json:"lat"`

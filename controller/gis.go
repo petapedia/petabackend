@@ -48,3 +48,41 @@ func GetRegion(respw http.ResponseWriter, req *http.Request) {
 	}
 	at.WriteJSON(respw, http.StatusOK, region)
 }
+
+func GetRoads(respw http.ResponseWriter, req *http.Request) {
+	_, err := watoken.Decode(config.PublicKeyWhatsAuth, at.GetLoginFromHeader(req))
+	if err != nil {
+		var respn model.Response
+		respn.Status = "Error : Token Tidak Valid "
+		respn.Location = "Decode Token Error: " + at.GetLoginFromHeader(req)
+		respn.Response = err.Error()
+		at.WriteJSON(respw, http.StatusForbidden, respn)
+		return
+	}
+	var longlat model.LongLat
+	err = json.NewDecoder(req.Body).Decode(&longlat)
+	if err != nil {
+		var respn model.Response
+		respn.Status = "Error : Body tidak valid"
+		respn.Response = err.Error()
+		at.WriteJSON(respw, http.StatusBadRequest, respn)
+		return
+	}
+	filter := bson.M{
+		"border": bson.M{
+			"$near": bson.M{
+				"$geometry": bson.M{
+					"type":        "Point",
+					"coordinates": []float64{longlat.Longitude, longlat.Latitude},
+				},
+				"$maxDistance": 50,
+			},
+		},
+	}
+	roads, err := atdb.GetOneDoc[model.Roads](config.Mongoconn, "jalan", filter)
+	if err != nil {
+		at.WriteJSON(respw, http.StatusNotFound, roads)
+		return
+	}
+	at.WriteJSON(respw, http.StatusOK, roads)
+}
