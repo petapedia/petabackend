@@ -9,6 +9,7 @@ var Origins = []string{
 	"https://petapedia.if.co.id",
 	"https://naskah.bukupedia.co.id",
 	"https://bukupedia.co.id",
+	"https://parkirgratis.if.co.id",
 }
 
 // Fungsi untuk memeriksa apakah origin diizinkan
