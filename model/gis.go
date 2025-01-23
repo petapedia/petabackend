@@ -2,6 +2,11 @@ package model
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
+type GeoJSONRoads struct {
+	Type     string  `bson:"type" json:"type"`
+	Features []Roads `bson:"features" json:"features"`
+}
+
 type Location struct {
 	Type        string        `bson:"type" json:"type"`
 	Coordinates [][][]float64 `bson:"coordinates" json:"coordinates"`
