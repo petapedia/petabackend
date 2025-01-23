@@ -25,6 +25,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 		controller.GetRoads(w, r)
 	case method == "POST" && path == "/data/geojson/jalan":
 		controller.GetGeoJSONRoads(w, r)
+	case method == "POST" && path == "/data/geojson/jalandalamlokasi":
+		controller.GetGEOJSONRoadsIntersectRegion(w, r)
 	//chat bot inbox
 	case method == "POST" && at.URLParam(path, "/webhook/nomor/:nomorwa"):
 		controller.PostInboxNomor(w, r)
